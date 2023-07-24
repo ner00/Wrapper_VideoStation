@@ -73,13 +73,13 @@ function error() {
   log "${RED}ERROR" "${RED}$1"
 }
 
-function restart_packages() {
-  text_restart_1=("Restarting CodecPack..." "Reiniciando CodecPack..." "Reiniciando o CodecPack..." "Redémarrage de CodecPack..." "CodecPack wird neu gestartet..." "Riavvio CodecPack...")
-
-  info "${GREEN}${text_restart_1[$LANG]}"
-  info "${GREEN}Restarting CodecPack..." >> $logfile
-  synopkg restart CodecPack 2>> $logfile
-}
+#function restart_packages() {
+#  text_restart_1=("Restarting CodecPack..." "Reiniciando CodecPack..." "Reiniciando o CodecPack..." "Redémarrage de CodecPack..." "CodecPack wird neu gestartet..." "Riavvio CodecPack...")
+#
+#  info "${GREEN}${text_restart_1[$LANG]}"
+#  info "${GREEN}Restarting CodecPack..." >> $logfile
+#  synopkg restart CodecPack 2>> $logfile
+#}
 
 function check_dependencias() {
 text_ckck_depen1=("You have ALL necessary packages Installed, GOOD." "Tienes TODOS los paquetes necesarios ya instalados, BIEN." "Você tem TODOS os pacotes necessários já instalados, BOM." "Vous avez TOUS les packages nécessaires déjà installés, BON." "Sie haben ALLE notwendigen Pakete bereits installiert, GUT." "Hai già installato TUTTI i pacchetti necessari, BUONO.")
