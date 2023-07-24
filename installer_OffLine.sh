@@ -146,41 +146,6 @@ function welcome_config() {
 }
 
 
-function start() {
-text_start_1=("THIS IS THE MAIN MENU, PLEASE CHOOSE YOUR SELECTION:" "ESTE ES EL MENÚ PRINCIPAL, POR FAVOR ESCOGE TU SELECCIÓN:" "ESTE É O MENU PRINCIPAL, POR FAVOR, ESCOLHA SUA SELEÇÃO:" "CECI EST LE MENU PRINCIPAL, VEUILLEZ CHOISIR VOTRE SÉLECTION:" "DAS IST DAS HAUPTMENÜ, BITTE WÄHLEN SIE IHRE AUSWAHL:" "QUESTO È IL MENU PRINCIPALE, SCEGLI LA TUA SELEZIONE:")
-text_start_2=("Install the Advanced Wrapper for VideoStation and DLNA MediaServer (If exist). (With 5.1 and 2.0 support, configurable)" "Instalar el Advanced Wrapper para VideoStation y DLNA MediaServer (si existe). (Con soporte 5.1 y 2.0, configurable)" "Instale o Advanced Wrapper for VideoStation e DLNA MediaServer (se houver). (Com suporte 5.1 e 2.0, configurável)" "Installez le Advanced Wrapper pour VideoStation et DLNA MediaServer (le cas échéant). (Avec prise en charge 5.1 et 2.0, configurable)" "Installieren Sie den Advanced Wrapper for VideoStation und DLNA MediaServer (falls vorhanden). (Mit 5.1 und 2.0 Unterstützung, konfigurierbar)" "Installare il Advanced Wrapper per VideoStation e DLNA MediaServer (se presente). (Con supporto 5.1 e 2.0, configurabile)")
-text_start_3=("Install the Simplest Wrapper for VideoStation and DLNA MediaServer (If exist). (Only 2.0 support, NOT configurable)" "Instalar el Wrapper más simple para VideoStation y DLNA MediaServer (si existe). (Con soporte 2.0 solamente, NO configurable)" "Instale o Wrapper mais simples para VideoStation e DLNA MediaServer (se houver). (Somente com suporte 2.0, NÃO configurável)" "Installez le wrapper le plus simple pour VideoStation et DLNA MediaServer (le cas échéant). (Avec prise en charge 2.0 uniquement, NON configurable)" "Installieren Sie den einfachsten Wrapper für VideoStation und DLNA MediaServer (falls vorhanden). (Nur mit 2.0-Unterstützung, NICHT konfigurierbar)" "Installare il wrapper più semplice per VideoStation e DLNA MediaServer (se presente). (Solo con supporto 2.0, NON configurabile)")
-text_start_4=("Uninstall the Simplest or the Advanced Wrappers for VideoStation and DLNA MediaServer." "Desinstalar el Wrapper más simple o el Advanced de VideoStation y del DLNA MediaServer." "Desinstale o Simpler ou Advanced Wrapper do VideoStation e do DLNA MediaServer." "Désinstallez Simpler ou Advanced Wrapper de VideoStation et DLNA MediaServer." "Deinstallieren Sie Simpler oder Advanced Wrapper von VideoStation und DLNA MediaServer." "Disinstallare Simpler o Advanced Wrapper da VideoStation e DLNA MediaServer.")
-text_start_5=("Change the config of the Advanced Wrapper for change the audio's codecs in VIDEO-STATION and DLNA." "Cambia la configuración del Advanced Wrapper para cambiar los codecs de audio en VIDEO-STATION y DLNA." "Altere as configurações do Advanced Wrapper para alterar os codecs de áudio em VIDEO-STATION e DLNA." "Modifiez les paramètres Advanced Wrapper pour modifier les codecs audio dans VIDEO-STATION et DLNA." "Ändern Sie die erweiterten Wrapper-Einstellungen, um die Audio-Codecs in VIDEO-STATION und DLNA zu ändern." "Modificare le impostazioni di Advanced Wrapper per modificare i codec audio in VIDEO-STATION e DLNA.")
-text_start_6=("Change the LANGUAGE in this Installer." "Cambiar el IDIOMA en este Instalador." "Altere o IDIOMA neste Instalador." "Modifiez la LANGUE dans ce programme d'installation." "Ändern Sie die SPRACHE in diesem Installationsprogramm." "Cambia la LINGUA in questo programma di installazione.")
-text_start_7=("EXIT from this Installer." "SALIR de este Instalador." "SAIR deste instalador." "QUITTER ce programme d'installation." "BEENDEN Sie dieses Installationsprogramm." "ESCI da questo programma di installazione.")
-text_start_8=("Please, What option wish to use?" "Por favor, ¿Qué opción desea utilizar?" "Por favor, qual opção você quer usar?" "S'il vous plaît, quelle option voulez-vous utiliser ?" "Bitte, welche Option möchten Sie verwenden?" "Per favore, quale opzione vuoi usare?")
-text_start_9=("Please answer I or Install | S or Simple | U or Uninstall | C or Config | L or Language | P or Patch | Z for Exit." "Por favor responda I o Instalar | S o Simple | U o Uninstall | C o Configuración | L o Lengua | P o Patch | Z para Salir." "Por favor, responda I ou Instalar | S ou Simples | U ou Uninstall | C ou Configuração | L ou Língua | P ou Patch | Z para Sair." "Veuillez répondre I ou Installer | S ou Simple | U ou Uninstall | C ou Configuration | L ou Langue | P ou patch | Z pour quitter." "Bitte antworten Sie I oder Installieren Sie | S oder Simple | U oder Uninstall | C oder Config | L oder Language | P oder Patch | Z zum Beenden." "Per favore rispondi I o Installa | S o Semplice | U o Uninstall | C o Configurazione | L o Lingua | P o Patch | Z per uscire.")
-text_start_10=("Menu for the CRACK of the AME's License. (BETA)" "Menú para el CRACK de la Licencia AME. (BETA)" "Menu para o CRACK da Licença AME. (BETA)" "Menu pour le CRACK de la licence AME. (BETA)" "Menü für den AME-Lizenz-CRACK. (BETA)" "Menu per il CRACK della licenza AME. (BETA)")
-
-   echo ""
-   echo ""
-   echo -e "${YELLOW}${text_start_1[$LANG]}"
-   echo ""
-   echo -e "${BLUE} ( P ) ${text_start_10[$LANG]}"
-   echo ""
-   echo -e "${PURPLE} ( Z ) ${text_start_7[$LANG]}"
-        while true; do
-	echo -e "${GREEN}"
-        read -p "${text_start_8[$LANG]}" isuclpz
-        case $isuclpz in
-        [Ii]* ) install_advanced;;
-        [Ss]* ) install_simple;;
-        [Uu]* ) uninstall_new;;
-	[Cc]* ) configurator;;
-	[Ll]* ) language;;
-	[Pp]* ) crackmenu;;
-      	[Zz]* ) exit 0;;
-        * ) echo -e "${YELLOW}${text_start_9[$LANG]}";;
-        esac
-        done
-}
-
 function titulo() {
    clear
 text_titulo_1=("====================FFMPEG WRAPPER INSTALLER FOR DSM 7.0 and above by Dark Nebular.====================" "====================INSTALADOR DE WRAPPER FFMPEG PARA DSM 7.0 y superior de Dark Nebular.====================" "==================== INSTALADOR DO FFMPEG WRAPPER PARA DSM 7.0 e superior de Dark Nebular.======================" "==================== FFMPEG WRAPPER INSTALLER POUR DSM 7.0 et supérieur de Dark Nebular.====================" "==================== FFMPEG WRAPPER INSTALLER FÜR DSM 7.0 und höher von Dark Nebular.=====================" "==================== INSTALLER FFMPEG WRAPPER PER DSM 7.0 e versioni successive da Dark Nebular.=======================")
@@ -296,7 +261,7 @@ function crackmenu() {
         case $puz in
         	[Pp]* ) patch_ame_license; break;;
 		[Uu]* ) unpatch_ame_license; break;;
-		[Zz]* ) reloadstart; break;;
+		[Zz]* ) exit 0;;
 		* ) echo -e "${YELLOW}${text_crackmenu_4[$LANG]}";;  
         esac
 	done
