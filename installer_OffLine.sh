@@ -27,7 +27,7 @@ version="SCPT_3.9.1"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 majorversion=$(cat /etc.defaults/VERSION | grep majorversion | sed 's/majorversion=//' | tr -d '"')
 minorversion=$(cat /etc.defaults/VERSION | grep minorversion | sed 's/minorversion=//' | tr -d '"')
-repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
+repo_url="https://raw.githubusercontent.com/ner00/Wrapper_VideoStation"
 setup="start"
 dependencias=("VideoStation" "ffmpeg6" "CodecPack")
 RED="\u001b[31m"
@@ -1217,7 +1217,7 @@ else
 	info "${YELLOW}${text_install_23[$LANG]}"
 	info "${YELLOW}Adding of the KEY of this Wrapper in /tmp." >> $logfile
 	touch /tmp/wrapper.KEY
-	echo -e "# DarkNebular´s $mode Wrapper" >> /tmp/wrapper.KEY
+	echo -e "# ner00´s $mode Wrapper" >> /tmp/wrapper.KEY
 	info "${GREEN}${text_install_24[$LANG]}"
 	
   if [[ -f "${cp_bin_path}/ffmpeg27" ]]; then
