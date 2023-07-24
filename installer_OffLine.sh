@@ -122,9 +122,7 @@ exit 1
 fi
 
 }
-function intro() {
-  clear
-}
+
 function welcome() {
   text_welcome_1=("FFMPEG (or GStreamer) WRAPPER INSTALLER version: $version" "INSTALADOR DEL WRAPPER DE FFMPEG (o GStreamer) versión: $version" "INSTALADOR DE ENVOLTÓRIO FFMPEG (ou GStreamer) versão: $version" "INSTALLATEUR DE WRAPPER FFMPEG (ou GStreamer) version: $version" "FFMPEG (oder GStreamer) WRAPPER INSTALLER Version: $version" "INSTALLATORE WRAPPER FFMPEG (o GStreamer) versione: $version")
   echo -e "${YELLOW}${text_welcome_1[$LANG]}"
@@ -136,15 +134,6 @@ function welcome() {
     echo ""
   fi
 }
-function welcome_config() {
- 
-  welcome_config=$(curl -s -L "$repo_url/main/texts/welcome_config_$LANG")
-  if [ "${#welcome_config}" -ge 1 ]; then
-    echo -e "${GREEN}	$welcome_config"
-    echo ""
-  fi
-}
-
 
 function titulo() {
    clear
@@ -449,8 +438,6 @@ while getopts s: flag; do
     *) echo "usage: $0 [-s install|autoinstall|uninstall|config|info]" >&2; exit 0;;
   esac
 done
-
-intro
 
 titulo
 
