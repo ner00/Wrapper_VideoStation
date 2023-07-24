@@ -28,7 +28,7 @@ dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productve
 majorversion=$(cat /etc.defaults/VERSION | grep majorversion | sed 's/majorversion=//' | tr -d '"')
 minorversion=$(cat /etc.defaults/VERSION | grep minorversion | sed 's/minorversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/ner00/Wrapper_VideoStation"
-setup="start"
+setup="crackmenu"
 dependencias=("VideoStation" "CodecPack")
 RED="\u001b[31m"
 BLUE="\u001b[36m"
