@@ -192,29 +192,12 @@ exit 1
 fi
 }
 
-function check_firmas() {
-  
-# CHEQUEOS DE FIRMAS
-if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
-check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
-fi
-
-if [[ -f "$ms_path/bin/ffmpeg.KEY" ]]; then
-check_amrif_2=$(sed -n '1p' < $ms_path/bin/ffmpeg.KEY | tr -d "# " | tr -d "\´sAdvancedWrapper")
-else
-check_amrif_2="ar"
-fi
-
-check_amrif="$check_amrif_1$check_amrif_2"
-
-}
-
 function crackmenu() {
  clear
  text_crackmenu_1=("THIS IS THE LICENSE CRACK MENU, PLEASE CHOOSE YOUR SELECTION:" "ESTE ES EL MENU DEL CRACK DE LICENCIAS, POR FAVOR ELIJA SU SELECCIÓN:" "ESTE É O MENU DE CRACK DE LICENÇA, POR FAVOR, ESCOLHA SUA SELEÇÃO:" "VOICI LE MENU DE CRACK DE LICENCE, VEUILLEZ CHOISIR VOTRE SÉLECTION :" "DIES IST DAS LIZENZ-Crack-MENÜ, BITTE WÄHLEN SIE IHRE AUSWAHL:" "QUESTO È IL MENU CRACK DELLA LICENZA, PER FAVORE SCEGLI LA TUA SELEZIONE:")
  text_crackmenu_2=("RETURN to MAIN menu." "VOLVER al MENU Principal." "VOLTAR ao MENU Principal." "RETOUR au MENU Principal." "ZURÜCK zum Hauptmenü." "INDIETRO al menù principale.")
  text_crackmenu_3=("Do you want to install the crack for the AME license?" "¿Deseas instalar el crack para la licencia del AME?" "Deseja instalar o crack para a licença AME?" "Voulez-vous installer le crack pour la licence AME ?" "Möchten Sie den Crack für die AME-Lizenz installieren?" "Vuoi installare la crack per la licenza AME?")
- text_crackmenu_4=("Please answer with the correct option writing: P (Patch the AME's license) or U (Unpatch the AME's license). Write Z (for return to MAIN menu)." "Por favor, responda con la opción correcta escribiendo: P (parchea la licencia de AME) o U (desparchea la licencia de AME). Escribe Z (para volver al menú PRINCIPAL)." "Por favor, responda com a opção correta digitando: P (patches de licença AME) ou U (unpatches de licença AME). Digite Z (para retornar ao menu PRINCIPAL)." "Veuillez répondre avec l'option correcte en tapant : P (corrige la licence AME) ou U (élimine la licence AME). Tapez Z (pour revenir au menu PRINCIPAL)." "Bitte antworten Sie mit der richtigen Option, indem Sie Folgendes eingeben: P (Patches der AME-Lizenz) oder U (Patches der AME-Lizenz aufheben). Geben Sie Z ein (um zum HAUPTMENÜ zurückzukehren)." "Si prega di rispondere con l'opzione corretta digitando: P (patch della licenza AME) o U (unpatch della licenza AME). Digitare Z (per tornare al menu PRINCIPALE).")
+ text_crackmenu_4=("Please answer with the correct option writing: P (Patch the AME's license) or U (Unpatch the AME's license). Write Z (to QUIT)." "Por favor, responda con la opción correcta escribiendo: P (parchea la licencia de AME) o U (desparchea la licencia de AME). Escribe Z (para volver al menú PRINCIPAL)." "Por favor, responda com a opção correta digitando: P (patches de licença AME) ou U (unpatches de licença AME). Digite Z (para retornar ao menu PRINCIPAL)." "Veuillez répondre avec l'option correcte en tapant : P (corrige la licence AME) ou U (élimine la licence AME). Tapez Z (pour revenir au menu PRINCIPAL)." "Bitte antworten Sie mit der richtigen Option, indem Sie Folgendes eingeben: P (Patches der AME-Lizenz) oder U (Patches der AME-Lizenz aufheben). Geben Sie Z ein (um zum HAUPTMENÜ zurückzukehren)." "Si prega di rispondere con l'opzione corretta digitando: P (patch della licenza AME) o U (unpatch della licenza AME). Digitare Z (per tornare al menu PRINCIPALE).")
  text_crackmenu_5=("==================== Installation of the AME's License Crack ====================" "==================== Instalación del Crack de Licencia de AME ====================" "==================== Instalando o crack da licença AME =====================" "==================== Installation du crack de licence AME ====================" "==================== Installieren des AME-Lizenz-Cracks ====================" "===================== Installazione della licenza AME Crack ====================")	
  text_crackmenu_6=("INSTALL the AME's License Crack" "INSTALAR el crack de licencia de AME" "INSTALE o crack da licença AME" "INSTALLER le crack de la licence AME" "INSTALLIEREN Sie den AME-Lizenz-Crack" "INSTALLA il crack della licenza AME")
  text_crackmenu_7=("UNINSTALL the AME's License Crack" "DESINSTALAR el crack de licencia de AME" "DESINSTALAR crack de licença AME" "DÉSINSTALLER le crack de la licence AME" "AME-Lizenz-Crack DEINSTALLIEREN" "DISINSTALLA il crack della licenza AME")	
@@ -272,13 +255,6 @@ text_patchame_10=("Crack installed correctly." "Crack instalado correctamente." 
 text_patchame_11=("Patched but unsuccessful." "Parcheado pero sin éxito." "Parcheado, mas sem sucesso." "Patché mais sans succès." "Gepatcht, aber ohne Erfolg." "Patched ma senza successo.")	
 text_patchame_12=("Please do an uninstallation of the Wrapper first." "Por favor, primero desinstale el Wrapper." "Faça uma desinstalação do Wrapper primeiro." "Veuillez d'abord désinstaller le Wrapper." "Bitte deinstallieren Sie zunächst den Wrapper." "Eseguire prima una disinstallazione del Wrapper.")	
 text_patchame_13=("Error occurred while writing to the file." "Se produjo un error al escribir en el archivo." "Ocorreu um erro ao escrever no arquivo." "Une erreur s'est produite lors de l'écriture dans le fichier." "Beim Schreiben in die Datei ist ein Fehler aufgetreten." "Si è verificato un errore durante la scrittura nel file.")
-
-if [[ -f "/tmp/wrapper.KEY" ]]; then
-info "${RED}${text_patchame_12[$LANG]}"
-info "${RED}Please do an uninstallation of the Wrapper first." >> $logfile
-sleep 4
-reloadstart
-fi
 
 # Verificar si ya existen los archivos de respaldo
 
@@ -424,8 +400,6 @@ welcome
 check_dependencias
 check_licence_AME
 check_versions
-check_firmas
-start
 }
 
 
@@ -450,8 +424,6 @@ check_dependencias
 check_licence_AME
 
 check_versions
-
-check_firmas
 
 case "$setup" in
   crackmenu) crackmenu;;
