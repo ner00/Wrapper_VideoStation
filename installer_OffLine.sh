@@ -129,7 +129,6 @@ function intro() {
     echo ""
     echo -e "${PURPLE}	$intro"
     echo ""
-    sleep 3
   fi
 }
 function welcome() {
