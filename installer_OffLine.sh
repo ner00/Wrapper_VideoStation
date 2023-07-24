@@ -29,28 +29,23 @@ majorversion=$(cat /etc.defaults/VERSION | grep majorversion | sed 's/majorversi
 minorversion=$(cat /etc.defaults/VERSION | grep minorversion | sed 's/minorversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/ner00/Wrapper_VideoStation"
 setup="crackmenu"
-dependencias=("VideoStation" "CodecPack")
+dependencias=("CodecPack")
 RED="\u001b[31m"
 BLUE="\u001b[36m"
 BLUEGSLP="\u001b[36m"
 PURPLE="\u001B[35m"
 GREEN="\u001b[32m"
 YELLOW="\u001b[33m"
-injector="0-Advanced"
 vs_path=/var/packages/VideoStation/target
 ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_path=/var/packages/CodecPack/target
 cp_bin_path="$cp_path/bin"
-firma="DkNbulDkNbul"
-firma2="DkNbular"
-firma_cp="DkNbul"
 declare -i control=0
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
 cpu_model=$(cat /proc/cpuinfo | grep "model name")
-GST_comp="NO"
 
 values=('669066909066906690' 'B801000000' '30')
 hex_values=('1F28' '48F5' '4921' '4953' '4975' '9AC8')
@@ -80,24 +75,10 @@ function error() {
 
 function restart_packages() {
   text_restart_1=("Restarting CodecPack..." "Reiniciando CodecPack..." "Reiniciando o CodecPack..." "Redémarrage de CodecPack..." "CodecPack wird neu gestartet..." "Riavvio CodecPack...")
-  text_restart_2=("Restarting VideoStation..." "Reiniciando VideoStation..." "Reiniciando o VideoStation..." "Redémarrage de VideoStation..." "VideoStation wird neu gestartet..." "Riavvio VideoStation...")
-  text_restart_3=("Restarting MediaServer..." "Reiniciando MediaServer..." "Reiniciando o MediaServer..." "Redémarrage de MediaServer..." "MediaServer wird neu gestartet..." "Riavvio MediaServer...")
-  
+
   info "${GREEN}${text_restart_1[$LANG]}"
   info "${GREEN}Restarting CodecPack..." >> $logfile
   synopkg restart CodecPack 2>> $logfile
-  
-  info "${GREEN}${text_restart_2[$LANG]}"
-  info "${GREEN}Restarting VideoStation..." >> $logfile
-  synopkg restart VideoStation 2>> $logfile
-  
-  
-  if [[ -d "$ms_path" ]]; then
-  info "${GREEN}${text_restart_3[$LANG]}"
-  info "${GREEN}Restarting MediaServer..." >> $logfile
-  synopkg restart MediaServer 2>> $logfile
-  fi
-
 }
 
 function check_dependencias() {
@@ -121,18 +102,6 @@ echo -e  "At least you need $npacks package/s to Install, please Install the dep
 exit 1
 fi
 
-}
-
-function welcome() {
-  text_welcome_1=("FFMPEG (or GStreamer) WRAPPER INSTALLER version: $version" "INSTALADOR DEL WRAPPER DE FFMPEG (o GStreamer) versión: $version" "INSTALADOR DE ENVOLTÓRIO FFMPEG (ou GStreamer) versão: $version" "INSTALLATEUR DE WRAPPER FFMPEG (ou GStreamer) version: $version" "FFMPEG (oder GStreamer) WRAPPER INSTALLER Version: $version" "INSTALLATORE WRAPPER FFMPEG (o GStreamer) versione: $version")
-  echo -e "${YELLOW}${text_welcome_1[$LANG]}"
-
-  welcome=$(curl -s -L "$repo_url/main/texts/welcome_$LANG.txt")
-  if [ "${#welcome}" -ge 1 ]; then
-    echo ""
-    echo -e "${GREEN}	$welcome"
-    echo ""
-  fi
 }
 
 function titulo() {
@@ -175,16 +144,12 @@ function check_versions() {
 if [[ "$majorversion" -ge "8" ]]; then
   cp_path="/var/packages/CodecPack/target/pack"
   cp_bin_path="$cp_path/bin"
-  injector="X-Advanced"
 elif [[ "$majorversion" -eq "7" && "$minorversion" -ge "1" ]]; then
   cp_path="/var/packages/CodecPack/target/pack"
   cp_bin_path="$cp_path/bin"
-  injector="X-Advanced"
 elif [[ "$majorversion" -eq "7" && "$minorversion" -eq "0" ]]; then
   cp_path="/var/packages/CodecPack/target"
   cp_bin_path="$cp_path/bin"
-  injector="0-Advanced"
-
 else
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure."
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure." >> $logfile
@@ -396,7 +361,6 @@ reloadstart
 function reloadstart() {
 clear
 titulo
-welcome
 check_dependencias
 check_licence_AME
 check_versions
@@ -406,18 +370,9 @@ check_versions
 ################################
 # EJECUCIÓN
 ################################
-while getopts s: flag; do
-  case "${flag}" in
-    s) setup=${OPTARG};;
-    *) echo "usage: $0 [-s install|autoinstall|uninstall|config|info]" >&2; exit 0;;
-  esac
-done
-
 titulo
 
 check_root
-
-welcome
 
 check_dependencias
 
