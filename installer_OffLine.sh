@@ -124,12 +124,6 @@ fi
 }
 function intro() {
   clear
-  intro=$(curl -s -L "$repo_url/main/intro.txt")
-  if [ "${#intro}" -ge 1 ]; then
-    echo ""
-    echo -e "${PURPLE}	$intro"
-    echo ""
-  fi
 }
 function welcome() {
   text_welcome_1=("FFMPEG (or GStreamer) WRAPPER INSTALLER version: $version" "INSTALADOR DEL WRAPPER DE FFMPEG (o GStreamer) versión: $version" "INSTALADOR DE ENVOLTÓRIO FFMPEG (ou GStreamer) versão: $version" "INSTALLATEUR DE WRAPPER FFMPEG (ou GStreamer) version: $version" "FFMPEG (oder GStreamer) WRAPPER INSTALLER Version: $version" "INSTALLATORE WRAPPER FFMPEG (o GStreamer) versione: $version")
