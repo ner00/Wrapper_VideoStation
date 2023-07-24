@@ -501,14 +501,7 @@ check_versions
 
 check_firmas
 
-other_checks
-
-
 case "$setup" in
-  start) start;;
-  install) install_advanced;;
-  autoinstall) install_auto;;
-  uninstall) uninstall_new;;
-  config) configurator;;
+  crackmenu) crackmenu;;
   info) exit 0;;
 esac
