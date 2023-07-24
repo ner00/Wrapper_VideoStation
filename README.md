@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="https://github.com/darknebular/Wrapper_VideoStation/blob/main/images/logoIntro.png?raw=true" height=300px alt="intro">
+  <img src="https://github.com/ner00/Wrapper_VideoStation/blob/main/images/logoIntro.png?raw=true" height=300px alt="intro">
 </p>
 <p align="center">
-  <img src="https://github.com/darknebular/Wrapper_VideoStation/blob/main/images/logo.png?raw=true" height=200px alt="logo">
+  <img src="https://github.com/ner00/Wrapper_VideoStation/blob/main/images/logo.png?raw=true" height=200px alt="logo">
 </p>
 
 ## THE MOST ADVANCED WRAPPER, THE FIRST AND UNIQUE WRAPPER IN INTERNET HAVING 5.1 TRANSCODING. YOU WILL HAVE FULL CONTROL OF THE CODEC USING THE CONFIGURATOR TOOL INTO THE INSTALLER.
@@ -58,12 +58,12 @@ This is not mandatory to have it installed for installing the Wrapper.
 
 # USAGE:
 Basic Installation command:  
-`bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")"`
+`bash -c "$(curl "https://raw.githubusercontent.com/ner00/Wrapper_VideoStation/main/installer.sh")"`
 
 .
 
 With options:  
-`bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")" -- -s <Flags>`
+`bash -c "$(curl "https://raw.githubusercontent.com/ner00/Wrapper_VideoStation/main/installer.sh")" -- -s <Flags>`
 
 | Flags        | Required | Description                                                                     |
 |--------------|----------|---------------------------------------------------------------------------------|
@@ -79,11 +79,11 @@ With options:
 
 ## Tests Wrappers:
 <p align="center">
-  <img src="https://github.com/darknebular/Wrapper_VideoStation/blob/main/images/test_results.png?raw=true" alt="wrappers">
+  <img src="https://github.com/ner00/Wrapper_VideoStation/blob/main/images/test_results.png?raw=true" alt="wrappers">
 </p>
 
 
 ## Tests Installers:
 <p align="center">
-  <img src="https://github.com/darknebular/Wrapper_VideoStation/blob/main/images/test_installers.png?raw=true" alt="installers">
+  <img src="https://github.com/ner00/Wrapper_VideoStation/blob/main/images/test_installers.png?raw=true" alt="installers">
 </p>
