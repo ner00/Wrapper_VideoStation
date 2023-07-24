@@ -1109,8 +1109,6 @@ sed -i 's/^# export/export/g' "$vs_path/bin/gst-launch-1.0" 2>> $logfile
 sed -i 's/^# export/export/g' "$vs_path/bin/gst-inspect-1.0" 2>> $logfile
 sed -i 's|stderrfile="/tmp/ffmpeg-${streamid}.stderr"|stderrfile="/tmp/gst-launch-1.0.stderr"|' "$vs_path/bin/gst-launch-1.0" 2>> $logfile
 sed -i 's|stderrfile="/tmp/ffmpeg-${streamid}.stderr"|stderrfile="/tmp/gst-inspect-1.0.stderr"|' "$vs_path/bin/gst-inspect-1.0" 2>> $logfile
-sed -i 's|bin1=/var/packages/ffmpeg6/target/bin/ffmpeg|bin1=/var/packages/VideoStation/target/bin/gst-launch-1.0.orig|' "$vs_path/bin/gst-launch-1.0" 2>> $logfile
-sed -i 's|bin1=/var/packages/ffmpeg6/target/bin/ffmpeg|bin1=/var/packages/VideoStation/target/bin/gst-inspect-1.0.orig|' "$vs_path/bin/gst-inspect-1.0" 2>> $logfile
 sed -i "s/FFmpeg $pid/GST-launch $pid/g" "$vs_path/bin/gst-launch-1.0" 2>> $logfile
 sed -i "s/FFmpeg $pid/GST-inspect $pid/g" "$vs_path/bin/gst-inspect-1.0" 2>> $logfile
 
