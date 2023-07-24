@@ -29,7 +29,7 @@ majorversion=$(cat /etc.defaults/VERSION | grep majorversion | sed 's/majorversi
 minorversion=$(cat /etc.defaults/VERSION | grep minorversion | sed 's/minorversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/ner00/Wrapper_VideoStation"
 setup="start"
-dependencias=("VideoStation" "ffmpeg6" "CodecPack")
+dependencias=("VideoStation" "ffmpeg" "CodecPack")
 RED="\u001b[31m"
 BLUE="\u001b[36m"
 BLUEGSLP="\u001b[36m"
