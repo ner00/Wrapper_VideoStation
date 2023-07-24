@@ -364,6 +364,7 @@ titulo
 check_dependencias
 check_licence_AME
 check_versions
+crackmenu
 }
 
 
