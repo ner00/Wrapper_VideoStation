@@ -36,14 +36,10 @@ BLUEGSLP="\u001b[36m"
 PURPLE="\u001B[35m"
 GREEN="\u001b[32m"
 YELLOW="\u001b[33m"
-vs_path=/var/packages/VideoStation/target
-ms_path=/var/packages/MediaServer/target
-vs_libsynovte_file="$vs_path/lib/libsynovte.so"
-ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_path=/var/packages/CodecPack/target
 cp_bin_path="$cp_path/bin"
 declare -i control=0
-logfile="/tmp/wrapper_ffmpeg.log"
+logfile="/tmp/amepatch.log"
 LANG="0"
 cpu_model=$(cat /proc/cpuinfo | grep "model name")
 
@@ -64,48 +60,42 @@ licsig_backup="/usr/syno/etc/license/data/ame/offline_license.sig.orig"
 ###############################
 
 function log() {
-  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2"
+  echo -e "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2"
 }
+
 function info() {
   log "${BLUE}INFO" "${YELLOW}$1"
 }
+
 function error() {
   log "${RED}ERROR" "${RED}$1"
 }
 
-#function restart_packages() {
-#  text_restart_1=("Restarting CodecPack...")
-#
-#  info "${GREEN}${text_restart_1[$LANG]}"
-#  info "${GREEN}Restarting CodecPack..." >> $logfile
-#  synopkg restart CodecPack 2>> $logfile
-#}
-
 function check_dependencias() {
-  text_ckck_depen1=("You have ALL necessary packages Installed, GOOD.")
+  text_ckck_depen1=("GOOD! You have ALL the necessary packages installed.")
   
   for dependencia in "${dependencias[@]}"; do
     if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
-      error "MISSING $dependencia Package." 
-      error "MISSING $dependencia Package." >> $logfile
+      error "MISSING $dependencia package." 
+      error "MISSING $dependencia package." >> $logfile
       let "npacks=npacks+1"
     fi
   done
   
   if [[ npacks -eq control ]]; then
-    echo -e  "${GREEN}${text_ckck_depen1[$LANG]}"
+    echo -e "${GREEN}${text_ckck_depen1[$LANG]}"
   fi
   
   if [[ npacks -ne control ]]; then
-    echo -e  "At least you need $npacks package/s to Install, please Install the dependencies and RE-RUN the Installer again."
+    echo -e "You need to install at least $npacks package(s), please install those dependencies and run this patcher again."
     exit 1
   fi
 }
 
 function titulo() {
   clear
-  text_titulo_1=("==================== AME License Crack for DSM 7.0 and above ====================")
-  text_titulo_2=("==================== This Crack is only avalaible for DSM 7.0 and above ====================")
+  text_titulo_1=("==================== AME License Patcher for DSM 7.0 and above ====================")
+  text_titulo_2=("==================== This patcher is only compatible with DSM 7.0 and above ====================")
 
   echo -e "${BLUE}${text_titulo_1[$LANG]}"
   echo -e "${BLUE}${text_titulo_2[$LANG]}"
@@ -115,20 +105,20 @@ function titulo() {
 
 function check_root() {
   if [[ $EUID -ne 0 ]]; then
-    error "YOU MUST BE ROOT TO EXECUTE THIS CRACK. Please write ("${PURPLE}" sudo -i "${RED}") and try again."
+    error "YOU MUST BE ROOT TO EXECUTE THIS PATCHER. Please type ("${PURPLE}" sudo -i "${RED}") and try again."
     exit 1
   fi
 }
 
 function check_licence_AME() {
   if [[ ! -f /usr/syno/etc/codec/activation.conf ]]; then
-    error "YOU HAVEN'T THE LICENSE LOADED in Advanced Media Extension package. Please LOAD this license and try again."
-    error "YOU HAVEN'T THE LICENSE LOADED in Advanced Media Extension package. Please LOAD this license and try again." >> $logfile
+    error "NO LICENSE LOADED in Advanced Media Extension package. Please LOAD a license and try again."
+    error "NO LICENSE LOADED in Advanced Media Extension package. Please LOAD a license and try again." >> $logfile
     exit 1
   fi
   if grep "false" /usr/syno/etc/codec/activation.conf >> $logfile; then
-    error "YOU HAVEN'T THE LICENCE ACTIVATED in Advanced Media Extension package. Please transcode something in VideoStation to activate it and try again."
-    error "YOU HAVEN'T THE LICENCE ACTIVATED in Advanced Media Extension package. Please transcode something in VideoStation to activate it and try again." >> $logfile
+    error "NO LICENSE ACTIVATED in Advanced Media Extension package. Please transcode a video in VideoStation to activate it and try again."
+    error "NO LICENSE ACTIVATED in Advanced Media Extension package. Please transcode a video in VideoStation to activate it and try again." >> $logfile
     exit 1
   fi
 }
@@ -145,30 +135,30 @@ function check_versions() {
     cp_path="/var/packages/CodecPack/target"
     cp_bin_path="$cp_path/bin"
   else
-    error "Your DSM Version $dsm_version is NOT SUPPORTED by this crack."
-    error "Your DSM Version $dsm_version is NOT SUPPORTED by this crack." >> $logfile
+    error "This patcher does not support your DSM version $dsm_version"
+    error "This patcher does not support your DSM version $dsm_version" >> $logfile
     exit 1
   fi
 }
 
 function crackmenu() {
   clear
-  text_crackmenu_1=("THIS IS THE LICENSE CRACK MENU, PLEASE SELECT AN OPTION:")
+  text_crackmenu_1=("PLEASE TYPE AN OPTION:")
   text_crackmenu_2=("QUIT")
-  text_crackmenu_3=("Do you want to crack the AME License?")
-  text_crackmenu_4=("Please type the corresponding letter: P to Patch the AME's license or U to Unpatch the AME's license. Type Z to QUIT.")
-  text_crackmenu_5=("==================== Installation of the AME's License Crack ====================")
-  text_crackmenu_6=("PATCH the AME's License")
-  text_crackmenu_7=("UNPATCH the AME's License")
-  text_crackmenu_8=("This patcher enables Advanced Media Extensions 3.0 for you, without having a login account.")
+  text_crackmenu_3=("Do you want to patche the AME License?")
+  text_crackmenu_4=("Please type the corresponding letter: P to Patch the AME License or U to Unpatch the AME License. Type Z to QUIT.")
+  text_crackmenu_5=("==================== AME License Patcher ====================")
+  text_crackmenu_6=("Patch AME License")
+  text_crackmenu_7=("Unpatch AME License")
+  text_crackmenu_8=("This patcher enables Advanced Media Extensions 3.0 for you, without needing a Synology account.")
   text_crackmenu_9=("This enables the HEVC and AAC codecs and its license in the AME package, up to DSM 7.2.")
-  text_crackmenu_11=("Note that in order to use this, you will have to use a valid S/N (but won't need to login with a Synology account).")
+  text_crackmenu_11=("Note that in order to use this, your Synology DSM needs to use a valid S/N, even if generated.")
   text_crackmenu_12=("DISCLAIMER:")
-  text_crackmenu_13=("Use at your own risk, although it has been done to be as safe as possible, there could be errors.")
+  text_crackmenu_13=("Use at your own risk! Although it has been tested, there could be errors.")
   
   echo ""
   echo -e "${BLUE}${text_crackmenu_5[$LANG]}"
-  info "${BLUE}==================== Installation of the AME's License Crack ====================" >> $logfile
+  info "${BLUE}==================== AME License Patcher ====================" >> $logfile
   echo ""
   echo -e "${GREEN}${text_crackmenu_8[$LANG]}"
   echo -e "${GREEN}${text_crackmenu_9[$LANG]}"
@@ -206,9 +196,9 @@ patch_ame_license() {
   text_patchame_6=("$licsig backup created as $licsig_backup.")
   text_patchame_7=("Applying the patch.")
   text_patchame_8=("Checking whether patch is successful...")
-  text_patchame_9=("Successful, updating codecs.")
-  text_patchame_10=("Crack installed correctly.")
-  text_patchame_11=("Patched but unsuccessful.")
+  text_patchame_9=("Successful, updating codecs...")
+  text_patchame_10=("Done.")
+  text_patchame_11=("Patch was unsuccessful.")
   text_patchame_12=("Error occurred while writing to the file.")
   
   # Verificar si ya existen los archivos de respaldo
@@ -257,7 +247,7 @@ patch_ame_license() {
   fi
   
   if [ "$(md5sum -b "$so" | awk '{print $1}')" != "$expected_checksum" ]; then
-    echo "MD5 mismatch"
+    echo "MD5 mismatch, not matching any version of AME"
     unpatch_ame_license
     exit 1
   fi
@@ -280,22 +270,22 @@ patch_ame_license() {
   info "${YELLOW}${text_patchame_8[$LANG]}"
   info "${YELLOW}Checking whether patch is successful..." >> $logfile
     
-	if "$cp_usr_path/bin/synoame-bin-check-license"; then
+if "$cp_usr_path/bin/synoame-bin-check-license"; then
   	info "${YELLOW}${text_patchame_9[$LANG]}"
-    info "${YELLOW}Successful, updating codecs." >> $logfile
+    info "${YELLOW}Successful, updating codecs..." >> $logfile
     "$cp_usr_path/bin/synoame-bin-auto-install-needed-codec" 2>> "$logfile"
   	info "${GREEN}${text_patchame_10[$LANG]}"
-    info "${GREEN}Crack installed correctly." >> $logfile
+    info "${GREEN}Done." >> $logfile
   	sleep 4
   	reloadstart
   else
 	  info "${YELLOW}${text_patchame_11[$LANG]}"
-    info "${YELLOW}Patched but unsuccessful." >> $logfile
+    info "${YELLOW}Patch was unsuccessful." >> $logfile
     exit 1
   fi
 }
 
-unpatch_ame_license() {
+function unpatch_ame_license() {
   touch "$logfile"
   
   text_unpatchame_1=("$so file restored from $so_backup.")
@@ -304,7 +294,7 @@ unpatch_ame_license() {
   text_unpatchame_4=("Backup file $lic_backup does not exist. No restore action will be performed.")
   text_unpatchame_5=("$licsig file restored from $licsig_backup.")
   text_unpatchame_6=("Backup file $licsig_backup does not exist. No restore action will be performed.")
-  text_unpatchame_7=("Crack uninstalled correctly.")
+  text_unpatchame_7=("Patch removed successfully.")
 	
   if [ -f "$so_backup" ]; then
     mv "$so_backup" "$so"
@@ -334,12 +324,11 @@ unpatch_ame_license() {
   fi
   
   info "${GREEN}${text_unpatchame_7[$LANG]}"
-  info "${GREEN}Crack uninstalled correctly." >> $logfile
+  info "${GREEN}Patch removed successfully." >> $logfile
   
   sleep 4
   reloadstart
 }
-
 
 function reloadstart() {
   clear
@@ -366,5 +355,4 @@ check_versions
 
 case "$setup" in
   crackmenu) crackmenu;;
-  info) exit 0;;
 esac
