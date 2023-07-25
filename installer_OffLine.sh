@@ -21,15 +21,14 @@ version="SCPT_3.9.1"
 
 
 ###############################
-# VARIABLES GLOBALES
+# GLOBAL VARIABLES
 ###############################
 
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 majorversion=$(cat /etc.defaults/VERSION | grep majorversion | sed 's/majorversion=//' | tr -d '"')
 minorversion=$(cat /etc.defaults/VERSION | grep minorversion | sed 's/minorversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/ner00/Wrapper_VideoStation"
-setup="crackmenu"
-dependencias=("CodecPack")
+dependencies=("CodecPack")
 RED="\u001b[31m"
 BLUE="\u001b[36m"
 BLUEGSLP="\u001b[36m"
@@ -56,7 +55,7 @@ licsig_backup="/usr/syno/etc/license/data/ame/offline_license.sig.orig"
 
 
 ###############################
-# FUNCIONES
+# FUNCTIONS
 ###############################
 
 function log() {
@@ -71,13 +70,13 @@ function error() {
   log "${RED}ERROR" "${RED}$1"
 }
 
-function check_dependencias() {
+function check_dependencies() {
   text_ckck_depen1=("GOOD! You have ALL the necessary packages installed.")
   
-  for dependencia in "${dependencias[@]}"; do
-    if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
-      error "MISSING $dependencia package." 
-      error "MISSING $dependencia package." >> $logfile
+  for dependency in "${dependencies[@]}"; do
+    if [[ ! -d "/var/packages/${dependency[@]}" ]]; then
+      error "MISSING $dependency package." 
+      error "MISSING $dependency package." >> $logfile
       let "npacks=npacks+1"
     fi
   done
@@ -92,13 +91,13 @@ function check_dependencias() {
   fi
 }
 
-function titulo() {
+function title() {
   clear
-  text_titulo_1=("==================== AME License Patcher for DSM 7.0 and above ====================")
-  text_titulo_2=("==================== This patcher is only compatible with DSM 7.0 and above ====================")
+  text_title_1=("==================== AME License Patcher for DSM 7.0 and above ====================")
+  text_title_2=("==================== This patcher is only compatible with DSM 7.0 and above ====================")
 
-  echo -e "${BLUE}${text_titulo_1[$LANG]}"
-  echo -e "${BLUE}${text_titulo_2[$LANG]}"
+  echo -e "${BLUE}${text_title_1[$LANG]}"
+  echo -e "${BLUE}${text_title_2[$LANG]}"
   echo ""
   echo ""
 }
@@ -110,7 +109,7 @@ function check_root() {
   fi
 }
 
-function check_licence_AME() {
+function check_license_AME() {
   if [[ ! -f /usr/syno/etc/codec/activation.conf ]]; then
     error "NO LICENSE LOADED in Advanced Media Extension package. Please LOAD a license and try again."
     error "NO LICENSE LOADED in Advanced Media Extension package. Please LOAD a license and try again." >> $logfile
@@ -124,7 +123,7 @@ function check_licence_AME() {
 }
 
 function check_versions() {
-  # Contemplando la posibilidad de que las sucesivas versiones 0 de DSM 8 y futuras sigan con las variables correctas.
+  # Assume that DSM versions from 0 to 8 use the same paths.
   if [[ "$majorversion" -ge "8" ]]; then
     cp_path="/var/packages/CodecPack/target/pack"
     cp_bin_path="$cp_path/bin"
@@ -141,46 +140,46 @@ function check_versions() {
   fi
 }
 
-function crackmenu() {
+function patchmenu() {
   clear
-  text_crackmenu_1=("Please type an option:")
-  text_crackmenu_2=("Quit")
-  text_crackmenu_3=("What do you want to do? ")
-  text_crackmenu_4=("Please type the corresponding letter: P to Patch the AME License or U to Unpatch the AME License. Type Q to Quit.")
-  text_crackmenu_5=("==================== AME License Patcher ====================")
-  text_crackmenu_6=("Patch AME License")
-  text_crackmenu_7=("Unpatch AME License")
-  text_crackmenu_8=("This patcher enables Advanced Media Extensions 3.0 for you, without needing a Synology account.")
-  text_crackmenu_9=("This enables the HEVC and AAC codecs and its license in the AME package, up to DSM 7.2.")
-  text_crackmenu_11=("Note that in order to use this, your Synology DSM needs to use a valid S/N, even if generated.")
-  text_crackmenu_12=("DISCLAIMER:")
-  text_crackmenu_13=("Use at your own risk! Although it has been tested, there could be errors.")
+  text_patchmenu_1=("Please type an option:")
+  text_patchmenu_2=("Quit")
+  text_patchmenu_3=("What do you want to do? ")
+  text_patchmenu_4=("Please type the corresponding letter: P to Patch the AME License or U to Unpatch the AME License. Type Q to Quit.")
+  text_patchmenu_5=("==================== AME License Patcher ====================")
+  text_patchmenu_6=("Patch AME License")
+  text_patchmenu_7=("Unpatch AME License")
+  text_patchmenu_8=("This patcher enables Advanced Media Extensions 3.0 for you, without needing a Synology account.")
+  text_patchmenu_9=("This enables the HEVC and AAC codecs and its license in the AME package, up to DSM 7.2.")
+  text_patchmenu_11=("Note that in order to use this, your Synology DSM needs to use a valid S/N, even if generated.")
+  text_patchmenu_12=("DISCLAIMER:")
+  text_patchmenu_13=("Use at your own risk! Although it has been tested, there could be errors.")
   
   echo ""
-  echo -e "${BLUE}${text_crackmenu_5[$LANG]}"
+  echo -e "${BLUE}${text_patchmenu_5[$LANG]}"
   info "${BLUE}==================== AME License Patcher ====================" >> $logfile
   echo ""
-  echo -e "${GREEN}${text_crackmenu_8[$LANG]}"
-  echo -e "${GREEN}${text_crackmenu_9[$LANG]}"
-  echo -e "${GREEN}${text_crackmenu_11[$LANG]}"
+  echo -e "${GREEN}${text_patchmenu_8[$LANG]}"
+  echo -e "${GREEN}${text_patchmenu_9[$LANG]}"
+  echo -e "${GREEN}${text_patchmenu_11[$LANG]}"
   echo ""
   echo ""
-  echo -e "${RED}${text_crackmenu_12[$LANG]} ${YELLOW}${text_crackmenu_13[$LANG]}"
+  echo -e "${RED}${text_patchmenu_12[$LANG]} ${YELLOW}${text_patchmenu_13[$LANG]}"
   echo ""
-  echo -e "${YELLOW}${text_crackmenu_1[$LANG]}"
+  echo -e "${YELLOW}${text_patchmenu_1[$LANG]}"
   echo ""
-  echo -e "${BLUE} ( P ) ${text_crackmenu_6[$LANG]}"
-  echo -e "${BLUE} ( U ) ${text_crackmenu_7[$LANG]}"       
+  echo -e "${BLUE} ( P ) ${text_patchmenu_6[$LANG]}"
+  echo -e "${BLUE} ( U ) ${text_patchmenu_7[$LANG]}"       
   echo -e ""
-  echo -e "${PURPLE} ( Q ) ${text_crackmenu_2[$LANG]}"
+  echo -e "${PURPLE} ( Q ) ${text_patchmenu_2[$LANG]}"
   while true; do
     echo -e "${GREEN}"
-    read -p "${text_crackmenu_3[$LANG]}" puq
+    read -p "${text_patchmenu_3[$LANG]}" puq
     case $puq in
       [Pp]* ) patch_ame_license; break;;
       [Uu]* ) unpatch_ame_license; break;;
       [Qq]* ) exit 0;;
-      * ) echo -e "${YELLOW}${text_crackmenu_4[$LANG]}";;  
+      * ) echo -e "${YELLOW}${text_patchmenu_4[$LANG]}";;  
     esac
   done
 }
@@ -201,12 +200,12 @@ patch_ame_license() {
   text_patchame_11=("Patch was unsuccessful.")
   text_patchame_12=("Error occurred while writing to the file.")
   
-  # Verificar si ya existen los archivos de respaldo
+  # Check if backup files already exist
   if [ -f "$so_backup" ]; then
     info "${GREEN}${text_patchame_1[$LANG]}"
     info "${GREEN}The backup file $so_backup already exists. A new backup will not be created." >> $logfile
   else
-    # Crear copia de seguridad de libsynoame-license.so
+    # Make backup copy of libsynoame-license.so
     cp -p "$so" "$so_backup"
     info "${GREEN}${text_patchame_2[$LANG]}"
     info "${GREEN}$so backup created as $so_backup." >> $logfile
@@ -216,7 +215,7 @@ patch_ame_license() {
     info "${GREEN}${text_patchame_3[$LANG]}"
     info "${GREEN}The backup file $lic_backup already exists. A new backup will not be created." >> $logfile
   else
-    # Crear copia de seguridad de offline_license.json
+    # Make backup copy of offline_license.json
     cp -p "$lic" "$lic_backup"
     info "${GREEN}${text_patchame_4[$LANG]}"
     info "${GREEN}$lic backup created as $lic_backup." >> $logfile
@@ -226,7 +225,7 @@ patch_ame_license() {
     info "${GREEN}${text_patchame_5[$LANG]}"
     info "${GREEN}The backup file $licsig_backup already exists. A new backup will not be created." >> $logfile
   else
-    # Crear copia de seguridad de offline_license.sig
+    # Make backup copy of offline_license.sig
     cp -p "$licsig" "$licsig_backup"
     info "${GREEN}${text_patchame_6[$LANG]}"
     info "${GREEN}$licsig backup created as $licsig_backup." >> $logfile
@@ -235,7 +234,7 @@ patch_ame_license() {
    info "${YELLOW}${text_patchame_7[$LANG]}"
    info "${YELLOW}Applying the patch." >> $logfile
   
-  # Comprobar que el fichero a parchear sea exactamente la misma versión que se estudió. 
+  # Check if the file to patch has the expected checksum.
   if [[ "$majorversion" -eq "7" && "$minorversion" -le "1" ]]; then
     expected_checksum='fcc1084f4eadcf5855e6e8494fb79e23'
     hex_values=('1F28' '48F5' '4921' '4953' '4975' '9AC8')
@@ -247,7 +246,7 @@ patch_ame_license() {
   fi
   
   if [ "$(md5sum -b "$so" | awk '{print $1}')" != "$expected_checksum" ]; then
-    echo "MD5 mismatch, not matching any version of AME"
+    echo "MD5 mismatch, not matching any known version of AME"
     unpatch_ame_license
     exit 1
   fi
@@ -258,7 +257,7 @@ patch_ame_license() {
     printf '%s' "$value" | xxd -r -p | dd of="$so" bs=1 seek="$offset" conv=notrunc 2>> "$logfile"
     if [[ $? -ne 0 ]]; then
       info "${RED}${text_patchame_12[$LANG]}"
-      # Llama a la función unpatch_ame_license en caso de error
+      # Call the function unpatch_ame_license in case of error
       unpatch_ame_license  
       exit 1
     fi
@@ -332,27 +331,25 @@ function unpatch_ame_license() {
 
 function reloadstart() {
   clear
-  titulo
-  check_dependencias
-  check_licence_AME
+  title
+  check_dependencies
+  check_license_AME
   check_versions
-  crackmenu
+  patchmenu
 }
 
 
 ################################
-# EJECUCIÓN
+# EXECUTION
 ################################
-titulo
+title
 
 check_root
 
-check_dependencias
+check_dependencies
 
-check_licence_AME
+check_license_AME
 
 check_versions
 
-case "$setup" in
-  crackmenu) crackmenu;;
-esac
+patchmenu
