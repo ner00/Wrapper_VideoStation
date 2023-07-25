@@ -143,10 +143,10 @@ function check_versions() {
 
 function crackmenu() {
   clear
-  text_crackmenu_1=("PLEASE TYPE AN OPTION:")
-  text_crackmenu_2=("QUIT")
-  text_crackmenu_3=("Do you want to patche the AME License?")
-  text_crackmenu_4=("Please type the corresponding letter: P to Patch the AME License or U to Unpatch the AME License. Type Z to QUIT.")
+  text_crackmenu_1=("Please type an option:")
+  text_crackmenu_2=("Quit")
+  text_crackmenu_3=("What do you want to do? ")
+  text_crackmenu_4=("Please type the corresponding letter: P to Patch the AME License or U to Unpatch the AME License. Type Q to Quit.")
   text_crackmenu_5=("==================== AME License Patcher ====================")
   text_crackmenu_6=("Patch AME License")
   text_crackmenu_7=("Unpatch AME License")
@@ -172,14 +172,14 @@ function crackmenu() {
   echo -e "${BLUE} ( P ) ${text_crackmenu_6[$LANG]}"
   echo -e "${BLUE} ( U ) ${text_crackmenu_7[$LANG]}"       
   echo -e ""
-  echo -e "${PURPLE} ( Z ) ${text_crackmenu_2[$LANG]}"
+  echo -e "${PURPLE} ( Q ) ${text_crackmenu_2[$LANG]}"
   while true; do
     echo -e "${GREEN}"
-    read -p "${text_crackmenu_3[$LANG]}" puz
-    case $puz in
+    read -p "${text_crackmenu_3[$LANG]}" puq
+    case $puq in
       [Pp]* ) patch_ame_license; break;;
       [Uu]* ) unpatch_ame_license; break;;
-      [Zz]* ) exit 0;;
+      [Qq]* ) exit 0;;
       * ) echo -e "${YELLOW}${text_crackmenu_4[$LANG]}";;  
     esac
   done
